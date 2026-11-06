@@ -1,0 +1,1128 @@
+# IELTS Learning Management System — Complete Project Blueprint
+
+
+
+Practical deployment project
+
+Single-centre LMS
+
+
+
+For your IELTS centre in Kozhikode, Kerala, I recommend building a specialised IELTS Training Management System rather than a generic LMS.
+
+The software should manage two sides of the business:
+
+1. Centre Operations: Admissions, student records, batches, teachers, attendance, fees, schedules and administration.
+2. IELTS Learning Platform: Listening, Reading, Writing, Speaking, mock tests, band scores, feedback and individual student progress.
+
+The goal is to create a system that the centre can genuinely use every day, not just a demonstration project.
+
+[IELTS Helper LMS: AI-Powered IELTS Exam Preparation Platform | Next Generation Solutions](https://images.openai.com/static-rsc-4/AsQ7cVvtg6LvsGryUk3vFENo2Avl-NA9bNwr1Qj5yawC0AapsnzSHUoZY4VnGfHUmrTnpBCyU2Y5CTCruWpmzf4yrGK9ZE4LpyKhem3DVA8Eoq2dMgyhHZ-mtraUqzyhOUw2okYr0T1j6ZWPVOanGjVkM4czjoI2_-0RhFzehdc?purpose=inline)
+
+[CampusConnect - #1 Education Management Software for Schools, Colleges & Universities](https://images.openai.com/static-rsc-4/hcRcRdBV3MPRwTqEzvxXA0Ja1yC03JcCRuywJnjDzlpgVobWu-Ar6Hhlx0O_1eisEqhTCOb--_MlckDUFJyJjVpTvF5uXptna2EAfPmxlSHIfFzoc_ccrciavvfc6UzPxGI5q9R-T-ILwJSwYX82BYWWTrwNq2nmw9IQq_pnO_I?purpose=inline)
+
+[Edavro – Online Learning Management Dashboard Figma Template by Oxlao_Inc](https://images.openai.com/static-rsc-4/L4Rr6enuzrrk5VwG4FFEA2yLV1RzlPwGfBdwdprsTPg9aqOb4tEq6XsqXN21_98dg2Fzd2KjoEuTh6r3koUerZzbbipuyAnWXb2yAyfsvKg_B5U9Me_wXEfcHhHZYCS99v9BXPxRd_16k2sdFs70QOSXt14wEEy2o11baih_YeI?purpose=inline)
+
+12
+
+## 1. Project definition
+
+| Attribute         | Decision                                               |
+| ----------------- | ------------------------------------------------------ |
+| Project           | IELTS Centre LMS                                       |
+| Location          | Kozhikode, Kerala, India                               |
+| Business type     | IELTS coaching and language training                   |
+| Deployment        | Single training centre                                 |
+| Platform          | Responsive web application                             |
+| Users             | Admin, teachers, students                              |
+| Primary language  | English                                                |
+| Localisation      | Indian currency (INR), IST timezone                    |
+| Architecture      | Modular monolith                                       |
+| Primary objective | Manage centre operations and student IELTS preparation |
+
+### Core business objectives
+
+- Digitise student admissions and enrolments.
+- Manage multiple IELTS batches and schedules.
+- Track attendance and fee payments.
+- Provide structured IELTS learning resources.
+- Conduct online practice tests and mock examinations.
+- Evaluate student performance across all four IELTS skills.
+- Track individual band-score progression.
+- Give teachers and administrators actionable insights.
+- Allow students to access learning materials and results from home.
+
+## 2. User roles and permissions
+
+I recommend four roles initially.
+
+1\. Super Admin / Centre Admin
+
+Complete control of the centre.
+
+- Manage students, teachers, courses and batches.
+- Manage fees, payments and expenses.
+- View reports and analytics.
+- Configure the system and permissions.
+
+  2\. Teacher / IELTS Trainer
+
+  Manage assigned classes and students.
+- View assigned batches.
+- Mark attendance.
+- Upload study materials.
+- Create assignments and mock tests.
+- Evaluate Writing and Speaking.
+- Give individual feedback.
+
+  3\. Student
+
+  Access learning and monitor progress.
+- View timetable and attendance.
+- Access learning materials.
+- Complete assignments.
+- Take IELTS practice tests.
+- Submit Writing tasks.
+- Record Speaking responses.
+- View scores and teacher feedback.
+
+  4\. Receptionist / Accounts Staff
+
+  Optional restricted administrative access.
+- Register enquiries.
+- Manage admissions.
+- Record payments.
+- Generate receipts.
+- View student and fee records.
+
+Important: Don't give teachers access to financial information or let students access another student's records. Permissions must be enforced on the backend, not just hidden in the interface.
+
+## 3. Functional requirements — Main modules
+
+I would divide the system into 14 modules.
+
+### Module 1 — Dashboard
+
+Different dashboards for each role.
+
+Admin dashboard:
+
+- Total active students.
+- New admissions this month.
+- Active batches.
+- Today's scheduled classes.
+- Today's attendance summary.
+- Pending fee collections.
+- Upcoming examinations.
+- Student performance overview.
+
+Teacher dashboard:
+
+- Today's classes.
+- Assigned batches.
+- Students requiring evaluation.
+- Pending assignments.
+- Upcoming mock tests.
+
+Student dashboard:
+
+- Current IELTS course and batch.
+- Next scheduled class.
+- Attendance percentage.
+- Pending assignments.
+- Latest mock test results.
+- Overall IELTS skill performance.
+- Upcoming deadlines.
+
+### Module 2 — Student & Admission Management
+
+- Student registration.
+- Unique student ID.
+- Personal details and contact information.
+- Parent/emergency contact.
+- Educational qualification.
+- IELTS target band score.
+- Intended IELTS test date.
+- IELTS Academic / General Training selection.
+- Previous IELTS score, if applicable.
+- English proficiency assessment.
+- Course enrolment.
+- Admission documents.
+- Student status tracking.
+- Student profile and activity history.
+
+Kozhikode-specific consideration: Support Indian phone numbers, +91 country codes, INR fees, UPI payment references and Indian date formats.
+
+### Module 3 — Course & Batch Management
+
+Suggested courses:
+
+| Course                 | Description                        |
+| ---------------------- | ---------------------------------- |
+| IELTS Academic         | Higher education preparation       |
+| IELTS General Training | Migration and work preparation     |
+| IELTS Foundation       | English fundamentals               |
+| IELTS Intensive        | Short-duration preparation         |
+| Spoken English         | General communication              |
+| IELTS Crash Course     | Revision and mock-test preparation |
+
+Batch management:
+
+- Batch creation and unique batch ID.
+- Assign teachers.
+- Batch capacity.
+- Start and end dates.
+- Weekly timetable.
+- Classroom allocation.
+- Batch-wise student lists.
+- Batch transfer.
+- Batch completion and archival.
+
+### Module 4 — Timetable & Scheduling
+
+- Weekly calendar.
+- Daily class schedule.
+- Recurring classes.
+- Teacher availability.
+- Classroom availability.
+- Class rescheduling.
+- Cancelled classes.
+- Replacement classes.
+- Upcoming class reminders.
+- Student-specific timetable.
+
+### Module 5 — Attendance Management
+
+- Attendance by batch and date.
+- Present, Absent, Late and Excused statuses.
+- Teacher attendance.
+- Monthly attendance reports.
+- Automatic attendance percentage.
+- Student attendance history.
+- Absence notifications.
+- Attendance correction with audit logs.
+
+### Module 6 — IELTS Learning Management
+
+This is the most important academic module.
+
+It should have four distinct learning areas.
+
+## IELTS Academic Learning Structure
+
+Suggested LMS content hierarchy
+
+IELTS Preparation Course
+
+Listening
+
+4 sections · 40 questions
+
+Audio, transcripts, MCQs, maps, gap filling
+
+Reading
+
+3 passages · 40 questions
+
+Skimming, scanning, comprehension, matching
+
+Writing
+
+Task 1 and Task 2
+
+Essay submission, corrections, band feedback
+
+Speaking
+
+Parts 1, 2 and 3
+
+Audio recording, mock interviews, feedback
+
+#### Listening features
+
+- Audio player with playback controls.
+- Section-wise practice.
+- Timed practice tests.
+- Question types: MCQ, matching, map labelling, form completion, sentence completion.
+- Answer submission and automatic evaluation.
+- Transcript availability after submission.
+- Listening score and performance history.
+
+#### Reading features
+
+- Passage display alongside questions.
+- Timer and navigation between questions.
+- Question types: True/False/Not Given, Yes/No/Not Given, matching headings, MCQs, sentence completion.
+- Answer review.
+- Automatic scoring.
+- Time spent per passage.
+- Topic-wise accuracy reports.
+
+#### Writing features
+
+- Task 1 and Task 2 assignment creation.
+- Online text editor.
+- Word count.
+- Deadline management.
+- PDF/document submission.
+- Teacher annotations and corrections.
+- Multiple submission versions.
+- Teacher feedback based on IELTS assessment criteria:
+  - Task Achievement / Task Response.
+  - Coherence and Cohesion.
+  - Lexical Resource.
+  - Grammatical Range and Accuracy.
+- Individual criterion scores and estimated band score.
+
+#### Speaking features
+
+- Speaking Part 1, 2 and 3 practice.
+- Cue card management.
+- Audio recording and playback.
+- Teacher-assigned speaking tasks.
+- Mock interview scheduling.
+- Teacher evaluation.
+- Feedback based on:
+  - Fluency and Coherence.
+  - Lexical Resource.
+  - Grammatical Range and Accuracy.
+  - Pronunciation.
+- Individual band estimates.
+
+Important: The LMS should label teacher-assessed scores as practice or estimated scores, not official IELTS results. AI scoring, if added, should also be treated as indicative.
+
+### Module 7 — Question Bank & Mock Tests
+
+A central question bank is particularly valuable.
+
+- Question creation and editing.
+- Question categorisation by IELTS skill.
+- Difficulty levels.
+- Question type categorisation.
+- Audio and image attachments.
+- Passage management.
+- Answer keys.
+- Explanation for answers.
+- Test paper creation.
+- Timed mock examinations.
+- Full IELTS mock test.
+- Skill-specific mock test.
+- Automatic result generation.
+- Test history.
+- Test retakes.
+
+Test configuration should support:
+
+- IELTS Academic and General Training.
+- Listening, Reading, Writing and Speaking.
+- Individual skill tests.
+- Full-length mock tests.
+- Custom teacher-created assessments.
+
+### Module 8 — Band Score & Progress Tracking
+
+This should be one of the strongest features of your software.
+
+A student should be able to see how their performance evolves.
+
+## Example Student Performance Dashboard
+
+Latest estimated overall band
+
+# 6.5
+
+Target band
+
+# 7.5
+
+Skill-wise performance
+
+Listening
+
+7.5
+
+Reading
+
+7.0
+
+Writing
+
+6.0
+
+Speaking
+
+6.5
+
+Mock test history
+
+Illustrative student progress, not actual student data.
+
+45.256.57.759Test 1Test 2Test 3Test 4
+
+Example data for UI design. Actual overall scores must follow IELTS rounding rules.
+
+Other functionality:
+
+- Overall band calculation.
+- Skill-wise band tracking.
+- Test-by-test comparison.
+- Target band setting.
+- Weakness identification.
+- Teacher recommendations.
+- Downloadable progress reports.
+
+### Module 9 — Study Materials
+
+- Upload PDF study materials.
+- IELTS books and practice worksheets.
+- Listening audio files.
+- Reading passages.
+- Writing samples.
+- Speaking cue cards.
+- Vocabulary lists.
+- Grammar notes.
+- Organise by skill, topic, course and level.
+- Assign material to batches.
+- Restrict access by enrolment.
+- Track downloads and lesson completion.
+
+### Module 10 — Fees & Accounts
+
+For a centre in Kerala, include:
+
+- Course fee configuration.
+- Admission fee.
+- Installment plans.
+- Monthly payment tracking.
+- Cash payments.
+- UPI payments.
+- Bank transfers.
+- Online payment gateway integration.
+- Payment reference numbers.
+- Automatic receipt generation.
+- Outstanding fee reports.
+- Discounts and concessions.
+- Refund records.
+- Daily collection reports.
+
+Use INR as the default currency, with proper paise precision and a configurable receipt format.
+
+### Module 11 — Teacher Management
+
+- Teacher profile.
+- Specialisation by IELTS skill.
+- Batch assignments.
+- Class timetable.
+- Attendance.
+- Teaching hours.
+- Assignment evaluation queue.
+- Student feedback history.
+- Teacher workload reports.
+
+### Module 12 — Communication
+
+- Announcements.
+- Batch-wise notices.
+- Assignment reminders.
+- Class reminders.
+- Fee reminders.
+- Absence alerts.
+- Mock test notifications.
+- Student-teacher communication.
+- Email and optional WhatsApp integration.
+
+### Module 13 — Certificates
+
+- Course completion certificates.
+- Certificate templates.
+- Student name and course details.
+- Issue date and certificate number.
+- Downloadable PDF.
+- QR-based certificate verification.
+
+### Module 14 — Reports & Analytics
+
+Admin reports:
+
+- Student enrolment.
+- Course popularity.
+- Batch occupancy.
+- Attendance trends.
+- Fee collections.
+- Pending payments.
+- Teacher workload.
+- Mock test results.
+- Student retention.
+- Course completion.
+
+Teacher reports:
+
+- Batch performance.
+- Student attendance.
+- Writing evaluation progress.
+- Speaking evaluation progress.
+- Student weaknesses.
+
+## 4. Non-functional requirements
+
+These are requirements for how the application should operate, rather than features users directly interact with.
+
+| Requirement    | Recommended specification                                        |
+| -------------- | ---------------------------------------------------------------- |
+| Responsiveness | Mobile, tablet and desktop                                       |
+| Performance    | Normal pages load within 2–3 seconds under expected centre usage |
+| Security       | HTTPS, secure password hashing, role-based permissions           |
+| Database       | PostgreSQL                                                       |
+| Availability   | Target 99.5% monthly availability                                |
+| Backup         | Daily automated backups                                          |
+| Recovery       | Documented restoration process                                   |
+| Scalability    | Modular design, capable of future expansion                      |
+| Accessibility  | Keyboard navigation and readable contrast                        |
+| Auditability   | Log important administrative actions                             |
+| Data integrity | Transactions for payments and critical records                   |
+| File storage   | Private storage with controlled access                           |
+
+Additional considerations for the Indian deployment:
+
+- Store timestamps consistently and display in Asia/Kolkata timezone.
+- Follow applicable Indian privacy requirements, including the Digital Personal Data Protection framework.
+- Collect only necessary student information.
+- Obtain appropriate consent for recording student speaking responses.
+- Protect student records and uploaded documents.
+- Keep payment information secure; don't store card details yourself.
+
+# 5. Technical Architecture
+
+My recommendation is a modular monolithic architecture.
+
+For one IELTS centre, microservices would add unnecessary operational complexity. A modular monolith keeps the application manageable while separating its business domains.
+
+Recommended architecture
+
+Presentation Layer
+
+Responsive React Web Application
+
+Admin · Teacher · Student · Receptionist
+
+HTTPS / REST API
+
+## Backend Application
+
+Spring Boot · Java
+
+Authentication & RBAC
+
+Student Management
+
+Course & Batch
+
+Timetable
+
+Attendance
+
+IELTS Learning
+
+Question Bank & Tests
+
+Band & Progress
+
+Fees & Payments
+
+Teacher Management
+
+Notifications
+
+Reports & Certificates
+
+PostgreSQL
+
+Structured application data
+
+File Storage
+
+PDFs, audio, images, documents
+
+External integrations
+
+Email service
+
+WhatsApp API
+
+Payment gateway
+
+Video/audio tools
+
+### Recommended technology stack
+
+| Layer             | Technology                                      | Purpose                       |
+| ----------------- | ----------------------------------------------- | ----------------------------- |
+| Frontend          | React + TypeScript                              | Web interface                 |
+| UI                | Tailwind CSS                                    | Responsive styling            |
+| Backend           | Java + Spring Boot                              | Business logic and APIs       |
+| ORM               | Spring Data JPA / Hibernate                     | Database access               |
+| Database          | PostgreSQL                                      | Relational data               |
+| Authentication    | Spring Security                                 | Login and permissions         |
+| API documentation | OpenAPI / Swagger                               | API testing and documentation |
+| File storage      | S3-compatible storage or private server storage | Study materials               |
+| Charts            | Recharts                                        | Analytics                     |
+| PDF generation    | Java PDF library                                | Receipts and reports          |
+| Deployment        | Docker + Linux server                           | Production hosting            |
+| Version control   | Git + GitHub                                    | Source management             |
+
+Why this stack?
+
+- Spring Boot provides a structured backend for complex business rules.
+- PostgreSQL is well suited to interconnected entities such as students, courses, batches and payments.
+- React supports reusable interfaces and mobile-responsive dashboards.
+- TypeScript reduces frontend errors.
+- Docker makes deployment more reproducible.
+
+You do not need Redis, Kubernetes, microservices or an elaborate cloud infrastructure for the initial version.
+
+### 6. Database design
+
+I would organise the database around the following entities.
+
+| Domain        | Main tables                                           |
+| ------------- | ----------------------------------------------------- |
+| Users         | users, roles, permissions, user_roles                 |
+| Students      | students, guardians, student_documents                |
+| Teachers      | teachers, teacher_specialisations                     |
+| Courses       | courses, course_levels, curriculum_modules, lessons   |
+| Batches       | batches, batch_students, batch_teachers               |
+| Timetable     | class_sessions, classrooms                            |
+| Attendance    | attendance_records, leave_requests                    |
+| Learning      | learning_materials, material_assignments              |
+| Assignments   | assignments, submissions, submission_feedback         |
+| IELTS         | ielts_tests, test_sections, questions, answer_options |
+| Test results  | test_attempts, student_answers, skill_scores          |
+| Writing       | writing_submissions, writing_evaluations              |
+| Speaking      | speaking_submissions, speaking_evaluations            |
+| Finance       | fee_structures, invoices, payments, receipts          |
+| Certificates  | certificates                                          |
+| Communication | announcements, notifications                          |
+| Audit         | audit_logs                                            |
+
+#### Important relationships
+
+\#chatgpt-mermaid-\_r_1f5\_{font-family:-apple-system-body,ui-sans-serif,-apple-system,system-ui,"Segoe UI",Helvetica,"Apple Color Emoji",Arial,sans-serif,"Segoe UI Emoji","Segoe UI Symbol";font-size:16px;fill:rgb(237, 237, 237);}@keyframes edge-animation-frame{from{stroke-dashoffset:0;}}@keyframes dash{to{stroke-dashoffset:0;}}#chatgpt-mermaid-\_r_1f5\_ .edge-animation-slow{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 50s linear infinite;stroke-linecap:round;}#chatgpt-mermaid-\_r_1f5\_ .edge-animation-fast{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 20s linear infinite;stroke-linecap:round;}#chatgpt-mermaid-\_r_1f5\_ .error-icon{fill:rgb(48, 48, 48);}#chatgpt-mermaid-\_r_1f5\_ .error-text{fill:rgb(237, 237, 237);stroke:rgb(237, 237, 237);}#chatgpt-mermaid-\_r_1f5\_ .edge-thickness-normal{stroke-width:1px;}#chatgpt-mermaid-\_r_1f5\_ .edge-thickness-thick{stroke-width:3.5px;}#chatgpt-mermaid-\_r_1f5\_ .edge-pattern-solid{stroke-dasharray:0;}#chatgpt-mermaid-\_r_1f5\_ .edge-thickness-invisible{stroke-width:0;fill:none;}#chatgpt-mermaid-\_r_1f5\_ .edge-pattern-dashed{stroke-dasharray:3;}#chatgpt-mermaid-\_r_1f5\_ .edge-pattern-dotted{stroke-dasharray:2;}#chatgpt-mermaid-\_r_1f5\_ .marker{fill:rgb(175, 175, 175);stroke:rgb(175, 175, 175);}#chatgpt-mermaid-\_r_1f5\_ .marker.cross{stroke:rgb(175, 175, 175);}#chatgpt-mermaid-\_r_1f5\_ svg{font-family:-apple-system-body,ui-sans-serif,-apple-system,system-ui,"Segoe UI",Helvetica,"Apple Color Emoji",Arial,sans-serif,"Segoe UI Emoji","Segoe UI Symbol";font-size:16px;}#chatgpt-mermaid-\_r_1f5\_ p{margin:0;}#chatgpt-mermaid-\_r_1f5\_ .entityBox{fill:rgb(9, 23, 44);stroke:rgb(31, 78, 148);}#chatgpt-mermaid-\_r_1f5\_ .relationshipLabelBox{fill:rgb(48, 48, 48);opacity:0.7;background-color:rgb(48, 48, 48);}#chatgpt-mermaid-\_r_1f5\_ .relationshipLabelBox rect{opacity:0.5;}#chatgpt-mermaid-\_r_1f5\_ .labelBkg{background-color:rgba(48, 48, 48, 0.5);}#chatgpt-mermaid-\_r_1f5\_ .edgeLabel{background-color:rgb(0, 0, 0);}#chatgpt-mermaid-\_r_1f5\_ .edgeLabel .label rect{fill:rgb(0, 0, 0);}#chatgpt-mermaid-\_r_1f5\_ .edgeLabel .label text{fill:rgb(237, 237, 237);}#chatgpt-mermaid-\_r_1f5\_ .edgeLabel .label{fill:rgb(31, 78, 148);font-size:14px;}#chatgpt-mermaid-\_r_1f5\_ .label{font-family:-apple-system-body,ui-sans-serif,-apple-system,system-ui,"Segoe UI",Helvetica,"Apple Color Emoji",Arial,sans-serif,"Segoe UI Emoji","Segoe UI Symbol";color:rgb(237, 237, 237);}#chatgpt-mermaid-\_r_1f5\_ .edge-pattern-dashed{stroke-dasharray:8,8;}#chatgpt-mermaid-\_r_1f5\_ .node rect,#chatgpt-mermaid-\_r_1f5\_ .node circle,#chatgpt-mermaid-\_r_1f5\_ .node ellipse,#chatgpt-mermaid-\_r_1f5\_ .node polygon{fill:rgb(9, 23, 44);stroke:rgb(31, 78, 148);stroke-width:1px;}#chatgpt-mermaid-\_r_1f5\_ .relationshipLine{stroke:rgb(175, 175, 175);stroke-width:1px;fill:none;}#chatgpt-mermaid-\_r_1f5\_ .marker{fill:none!important;stroke:rgb(175, 175, 175)!important;stroke-width:1;}#chatgpt-mermaid-\_r_1f5\_ [data-look=neo].labelBkg{background-color:rgba(48, 48, 48, 0.5);}#chatgpt-mermaid-\_r_1f5\_ .node .neo-node{stroke:rgb(31, 78, 148);}#chatgpt-mermaid-\_r_1f5\_ [data-look="neo"].node rect,#chatgpt-mermaid-\_r_1f5\_ [data-look="neo"].cluster rect,#chatgpt-mermaid-\_r_1f5\_ [data-look="neo"].node polygon{stroke:url(#chatgpt-mermaid-\_r_1f5\_-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#chatgpt-mermaid-\_r_1f5\_ [data-look="neo"].swimlane.cluster rect{filter:none;}#chatgpt-mermaid-\_r_1f5\_ [data-look="neo"].node path{stroke:url(#chatgpt-mermaid-\_r_1f5\_-gradient);stroke-width:1px;}#chatgpt-mermaid-\_r_1f5\_ [data-look="neo"].node .outer-path{filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#chatgpt-mermaid-\_r_1f5\_ [data-look="neo"].node .neo-line path{stroke:rgb(31, 78, 148);filter:none;}#chatgpt-mermaid-\_r_1f5\_ [data-look="neo"].node circle{stroke:url(#chatgpt-mermaid-\_r_1f5\_-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#chatgpt-mermaid-\_r_1f5\_ [data-look="neo"].node circle .state-start{fill:#000000;}#chatgpt-mermaid-\_r_1f5\_ [data-look="neo"].icon-shape .icon{fill:url(#chatgpt-mermaid-\_r_1f5\_-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#chatgpt-mermaid-\_r_1f5\_ [data-look="neo"].icon-shape .icon-neo path{stroke:url(#chatgpt-mermaid-\_r_1f5\_-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#chatgpt-mermaid-\_r_1f5\_ :root{--mermaid-font-family:-apple-system-body,ui-sans-serif,-apple-system,system-ui,"Segoe UI",Helvetica,"Apple Color Emoji",Arial,sans-serif,"Segoe UI Emoji","Segoe UI Symbol";}USERSSTUDENTSTEACHERSENROLMENTSCOURSESBATCHESBATCH_TEACHERSCLASS_SESSIONSATTENDANCEIELTS_TESTSTEST_ATTEMPTSSKILL_SCORESINVOICESPAYMENTShashasmakescontainsgroupsassignedhasschedulesrecordsreceivesincludeshastakesproducesreceivessettles
+
+A few important design decisions:
+
+1. Keep `users` separate from `students` and `teachers`. Authentication identity and academic profile are different things.
+2. Use enrolments to connect students to courses and batches. This allows students to change batches without losing history.
+3. Store each mock test attempt separately. Never overwrite an earlier attempt.
+4. Store writing and speaking assessment criteria individually, not just one overall band.
+5. Maintain payment transactions and receipts separately from fee structures.
+6. Use soft deletion or archival for important academic and financial records, with appropriate retention rules.
+
+# 7. Main application workflows
+
+A good LMS should connect modules together instead of treating them as independent CRUD screens.
+
+Here are the key business workflows.
+
+### Workflow A — Student admission
+
+\#chatgpt-mermaid-\_r_1fc\_{font-family:-apple-system-body,ui-sans-serif,-apple-system,system-ui,"Segoe UI",Helvetica,"Apple Color Emoji",Arial,sans-serif,"Segoe UI Emoji","Segoe UI Symbol";font-size:16px;fill:rgb(237, 237, 237);}@keyframes edge-animation-frame{from{stroke-dashoffset:0;}}@keyframes dash{to{stroke-dashoffset:0;}}#chatgpt-mermaid-\_r_1fc\_ .edge-animation-slow{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 50s linear infinite;stroke-linecap:round;}#chatgpt-mermaid-\_r_1fc\_ .edge-animation-fast{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 20s linear infinite;stroke-linecap:round;}#chatgpt-mermaid-\_r_1fc\_ .error-icon{fill:rgb(48, 48, 48);}#chatgpt-mermaid-\_r_1fc\_ .error-text{fill:rgb(237, 237, 237);stroke:rgb(237, 237, 237);}#chatgpt-mermaid-\_r_1fc\_ .edge-thickness-normal{stroke-width:1px;}#chatgpt-mermaid-\_r_1fc\_ .edge-thickness-thick{stroke-width:3.5px;}#chatgpt-mermaid-\_r_1fc\_ .edge-pattern-solid{stroke-dasharray:0;}#chatgpt-mermaid-\_r_1fc\_ .edge-thickness-invisible{stroke-width:0;fill:none;}#chatgpt-mermaid-\_r_1fc\_ .edge-pattern-dashed{stroke-dasharray:3;}#chatgpt-mermaid-\_r_1fc\_ .edge-pattern-dotted{stroke-dasharray:2;}#chatgpt-mermaid-\_r_1fc\_ .marker{fill:rgb(175, 175, 175);stroke:rgb(175, 175, 175);}#chatgpt-mermaid-\_r_1fc\_ .marker.cross{stroke:rgb(175, 175, 175);}#chatgpt-mermaid-\_r_1fc\_ svg{font-family:-apple-system-body,ui-sans-serif,-apple-system,system-ui,"Segoe UI",Helvetica,"Apple Color Emoji",Arial,sans-serif,"Segoe UI Emoji","Segoe UI Symbol";font-size:16px;}#chatgpt-mermaid-\_r_1fc\_ p{margin:0;}#chatgpt-mermaid-\_r_1fc\_ .label{font-family:-apple-system-body,ui-sans-serif,-apple-system,system-ui,"Segoe UI",Helvetica,"Apple Color Emoji",Arial,sans-serif,"Segoe UI Emoji","Segoe UI Symbol";color:rgb(237, 237, 237);}#chatgpt-mermaid-\_r_1fc\_ .cluster-label text{fill:rgb(237, 237, 237);}#chatgpt-mermaid-\_r_1fc\_ .cluster-label span{color:rgb(237, 237, 237);}#chatgpt-mermaid-\_r_1fc\_ .cluster-label span p{background-color:transparent;}#chatgpt-mermaid-\_r_1fc\_ .label text,#chatgpt-mermaid-\_r_1fc\_ span{fill:rgb(237, 237, 237);color:rgb(237, 237, 237);}#chatgpt-mermaid-\_r_1fc\_ .node rect,#chatgpt-mermaid-\_r_1fc\_ .node circle,#chatgpt-mermaid-\_r_1fc\_ .node ellipse,#chatgpt-mermaid-\_r_1fc\_ .node polygon,#chatgpt-mermaid-\_r_1fc\_ .node path{fill:rgb(9, 23, 44);stroke:rgb(31, 78, 148);stroke-width:1px;}#chatgpt-mermaid-\_r_1fc\_ .rough-node .label text,#chatgpt-mermaid-\_r_1fc\_ .node .label text,#chatgpt-mermaid-\_r_1fc\_ .image-shape .label,#chatgpt-mermaid-\_r_1fc\_ .icon-shape .label{text-anchor:middle;}#chatgpt-mermaid-\_r_1fc\_ .node .katex path{fill:#000;stroke:#000;stroke-width:1px;}#chatgpt-mermaid-\_r_1fc\_ .rough-node .label,#chatgpt-mermaid-\_r_1fc\_ .node .label,#chatgpt-mermaid-\_r_1fc\_ .image-shape .label,#chatgpt-mermaid-\_r_1fc\_ .icon-shape .label{text-align:center;}#chatgpt-mermaid-\_r_1fc\_ .node.clickable{cursor:pointer;}#chatgpt-mermaid-\_r_1fc\_ .root .anchor path{fill:rgb(175, 175, 175)!important;stroke-width:0;stroke:rgb(175, 175, 175);}#chatgpt-mermaid-\_r_1fc\_ .arrowheadPath{fill:rgb(175, 175, 175);}#chatgpt-mermaid-\_r_1fc\_ .edgePath .path{stroke:rgb(175, 175, 175);stroke-width:1px;}#chatgpt-mermaid-\_r_1fc\_ .flowchart-link{stroke:rgb(175, 175, 175);fill:none;}#chatgpt-mermaid-\_r_1fc\_ .edgeLabel{background-color:rgb(0, 0, 0);text-align:center;}#chatgpt-mermaid-\_r_1fc\_ .edgeLabel p{background-color:rgb(0, 0, 0);}#chatgpt-mermaid-\_r_1fc\_ .edgeLabel rect{opacity:0.5;background-color:rgb(0, 0, 0);fill:rgb(0, 0, 0);}#chatgpt-mermaid-\_r_1fc\_ .labelBkg{background-color:rgba(0, 0, 0, 0.5);}#chatgpt-mermaid-\_r_1fc\_ .cluster rect{fill:rgb(48, 48, 48);stroke:rgba(255, 255, 255, 0.15);stroke-width:1px;}#chatgpt-mermaid-\_r_1fc\_ .cluster text{fill:rgb(237, 237, 237);}#chatgpt-mermaid-\_r_1fc\_ .cluster span{color:rgb(237, 237, 237);}#chatgpt-mermaid-\_r_1fc\_ div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;font-family:-apple-system-body,ui-sans-serif,-apple-system,system-ui,"Segoe UI",Helvetica,"Apple Color Emoji",Arial,sans-serif,"Segoe UI Emoji","Segoe UI Symbol";font-size:12px;background:rgb(48, 48, 48);border:1px solid rgba(255, 255, 255, 0.15);border-radius:2px;pointer-events:none;z-index:100;}#chatgpt-mermaid-\_r_1fc\_ .flowchartTitleText{text-anchor:middle;font-size:18px;fill:rgb(237, 237, 237);}#chatgpt-mermaid-\_r_1fc\_ rect.text{fill:none;stroke-width:0;}#chatgpt-mermaid-\_r_1fc\_ .icon-shape,#chatgpt-mermaid-\_r_1fc\_ .image-shape{background-color:rgb(0, 0, 0);text-align:center;}#chatgpt-mermaid-\_r_1fc\_ .icon-shape p,#chatgpt-mermaid-\_r_1fc\_ .image-shape p{background-color:rgb(0, 0, 0);padding:2px;}#chatgpt-mermaid-\_r_1fc\_ .icon-shape .label rect,#chatgpt-mermaid-\_r_1fc\_ .image-shape .label rect{opacity:0.5;background-color:rgb(0, 0, 0);fill:rgb(0, 0, 0);}#chatgpt-mermaid-\_r_1fc\_ .label-icon{display:inline-block;height:1em;overflow:visible;vertical-align:-0.125em;}#chatgpt-mermaid-\_r_1fc\_ .node .label-icon path{fill:currentColor;stroke:revert;stroke-width:revert;}#chatgpt-mermaid-\_r_1fc\_ .node .neo-node{stroke:rgb(31, 78, 148);}#chatgpt-mermaid-\_r_1fc\_ [data-look="neo"].node rect,#chatgpt-mermaid-\_r_1fc\_ [data-look="neo"].cluster rect,#chatgpt-mermaid-\_r_1fc\_ [data-look="neo"].node polygon{stroke:url(#chatgpt-mermaid-\_r_1fc\_-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#chatgpt-mermaid-\_r_1fc\_ [data-look="neo"].swimlane.cluster rect{filter:none;}#chatgpt-mermaid-\_r_1fc\_ [data-look="neo"].node path{stroke:url(#chatgpt-mermaid-\_r_1fc\_-gradient);stroke-width:1px;}#chatgpt-mermaid-\_r_1fc\_ [data-look="neo"].node .outer-path{filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#chatgpt-mermaid-\_r_1fc\_ [data-look="neo"].node .neo-line path{stroke:rgb(31, 78, 148);filter:none;}#chatgpt-mermaid-\_r_1fc\_ [data-look="neo"].node circle{stroke:url(#chatgpt-mermaid-\_r_1fc\_-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#chatgpt-mermaid-\_r_1fc\_ [data-look="neo"].node circle .state-start{fill:#000000;}#chatgpt-mermaid-\_r_1fc\_ [data-look="neo"].icon-shape .icon{fill:url(#chatgpt-mermaid-\_r_1fc\_-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#chatgpt-mermaid-\_r_1fc\_ [data-look="neo"].icon-shape .icon-neo path{stroke:url(#chatgpt-mermaid-\_r_1fc\_-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#chatgpt-mermaid-\_r_1fc\_ .node text{font-size:14px;font-weight:600;letter-spacing:normal;fill:rgb(153, 206, 255);}#chatgpt-mermaid-\_r_1fc\_ .edgeLabels text{font-size:13px;font-weight:600;letter-spacing:-0.08px;fill:rgb(153, 206, 255);}#chatgpt-mermaid-\_r_1fc\_ .node tspan[font-weight="normal"],#chatgpt-mermaid-\_r_1fc\_ .edgeLabels tspan[font-weight="normal"]{font-weight:600;}#chatgpt-mermaid-\_r_1fc\_ .edgeLabel .label rect{opacity:1;rx:13px;ry:13px;fill:rgb(0, 14, 26);stroke:rgb(26, 62, 95);stroke-width:1px;}#chatgpt-mermaid-\_r_1fc\_ .node rect,#chatgpt-mermaid-\_r_1fc\_ .node circle,#chatgpt-mermaid-\_r_1fc\_ .node ellipse,#chatgpt-mermaid-\_r_1fc\_ .node polygon,#chatgpt-mermaid-\_r_1fc\_ .node path{fill:rgb(0, 40, 77);stroke:rgba(255, 255, 255, 0.1);stroke-width:1px;}#chatgpt-mermaid-\_r_1fc\_ .node rect{rx:16px;ry:16px;}#chatgpt-mermaid-\_r_1fc\_ .mermaid-decision .label-container{fill:rgb(0, 14, 26);stroke:rgb(26, 62, 95);stroke-dasharray:2,2;}#chatgpt-mermaid-\_r_1fc\_ .edgePaths .flowchart-link{stroke:rgb(175, 175, 175);stroke-width:1px;stroke-linecap:round;stroke-linejoin:round;}#chatgpt-mermaid-\_r_1fc\_ .marker{fill:rgb(175, 175, 175);stroke:rgb(175, 175, 175);}#chatgpt-mermaid-\_r_1fc\_ :root{--mermaid-font-family:-apple-system-body,ui-sans-serif,-apple-system,system-ui,"Segoe UI",Helvetica,"Apple Color Emoji",Arial,sans-serif,"Segoe UI Emoji","Segoe UI Symbol";}New EnquiryRegister StudentInitial AssessmentSelect IELTS CourseAssign BatchCreate Fee InvoiceRecord PaymentActivate Student AccountStudent Accesses LMS
+
+### Workflow B — Daily class
+
+\#chatgpt-mermaid-\_r_1fj\_{font-family:-apple-system-body,ui-sans-serif,-apple-system,system-ui,"Segoe UI",Helvetica,"Apple Color Emoji",Arial,sans-serif,"Segoe UI Emoji","Segoe UI Symbol";font-size:16px;fill:rgb(237, 237, 237);}@keyframes edge-animation-frame{from{stroke-dashoffset:0;}}@keyframes dash{to{stroke-dashoffset:0;}}#chatgpt-mermaid-\_r_1fj\_ .edge-animation-slow{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 50s linear infinite;stroke-linecap:round;}#chatgpt-mermaid-\_r_1fj\_ .edge-animation-fast{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 20s linear infinite;stroke-linecap:round;}#chatgpt-mermaid-\_r_1fj\_ .error-icon{fill:rgb(48, 48, 48);}#chatgpt-mermaid-\_r_1fj\_ .error-text{fill:rgb(237, 237, 237);stroke:rgb(237, 237, 237);}#chatgpt-mermaid-\_r_1fj\_ .edge-thickness-normal{stroke-width:1px;}#chatgpt-mermaid-\_r_1fj\_ .edge-thickness-thick{stroke-width:3.5px;}#chatgpt-mermaid-\_r_1fj\_ .edge-pattern-solid{stroke-dasharray:0;}#chatgpt-mermaid-\_r_1fj\_ .edge-thickness-invisible{stroke-width:0;fill:none;}#chatgpt-mermaid-\_r_1fj\_ .edge-pattern-dashed{stroke-dasharray:3;}#chatgpt-mermaid-\_r_1fj\_ .edge-pattern-dotted{stroke-dasharray:2;}#chatgpt-mermaid-\_r_1fj\_ .marker{fill:rgb(175, 175, 175);stroke:rgb(175, 175, 175);}#chatgpt-mermaid-\_r_1fj\_ .marker.cross{stroke:rgb(175, 175, 175);}#chatgpt-mermaid-\_r_1fj\_ svg{font-family:-apple-system-body,ui-sans-serif,-apple-system,system-ui,"Segoe UI",Helvetica,"Apple Color Emoji",Arial,sans-serif,"Segoe UI Emoji","Segoe UI Symbol";font-size:16px;}#chatgpt-mermaid-\_r_1fj\_ p{margin:0;}#chatgpt-mermaid-\_r_1fj\_ .label{font-family:-apple-system-body,ui-sans-serif,-apple-system,system-ui,"Segoe UI",Helvetica,"Apple Color Emoji",Arial,sans-serif,"Segoe UI Emoji","Segoe UI Symbol";color:rgb(237, 237, 237);}#chatgpt-mermaid-\_r_1fj\_ .cluster-label text{fill:rgb(237, 237, 237);}#chatgpt-mermaid-\_r_1fj\_ .cluster-label span{color:rgb(237, 237, 237);}#chatgpt-mermaid-\_r_1fj\_ .cluster-label span p{background-color:transparent;}#chatgpt-mermaid-\_r_1fj\_ .label text,#chatgpt-mermaid-\_r_1fj\_ span{fill:rgb(237, 237, 237);color:rgb(237, 237, 237);}#chatgpt-mermaid-\_r_1fj\_ .node rect,#chatgpt-mermaid-\_r_1fj\_ .node circle,#chatgpt-mermaid-\_r_1fj\_ .node ellipse,#chatgpt-mermaid-\_r_1fj\_ .node polygon,#chatgpt-mermaid-\_r_1fj\_ .node path{fill:rgb(9, 23, 44);stroke:rgb(31, 78, 148);stroke-width:1px;}#chatgpt-mermaid-\_r_1fj\_ .rough-node .label text,#chatgpt-mermaid-\_r_1fj\_ .node .label text,#chatgpt-mermaid-\_r_1fj\_ .image-shape .label,#chatgpt-mermaid-\_r_1fj\_ .icon-shape .label{text-anchor:middle;}#chatgpt-mermaid-\_r_1fj\_ .node .katex path{fill:#000;stroke:#000;stroke-width:1px;}#chatgpt-mermaid-\_r_1fj\_ .rough-node .label,#chatgpt-mermaid-\_r_1fj\_ .node .label,#chatgpt-mermaid-\_r_1fj\_ .image-shape .label,#chatgpt-mermaid-\_r_1fj\_ .icon-shape .label{text-align:center;}#chatgpt-mermaid-\_r_1fj\_ .node.clickable{cursor:pointer;}#chatgpt-mermaid-\_r_1fj\_ .root .anchor path{fill:rgb(175, 175, 175)!important;stroke-width:0;stroke:rgb(175, 175, 175);}#chatgpt-mermaid-\_r_1fj\_ .arrowheadPath{fill:rgb(175, 175, 175);}#chatgpt-mermaid-\_r_1fj\_ .edgePath .path{stroke:rgb(175, 175, 175);stroke-width:1px;}#chatgpt-mermaid-\_r_1fj\_ .flowchart-link{stroke:rgb(175, 175, 175);fill:none;}#chatgpt-mermaid-\_r_1fj\_ .edgeLabel{background-color:rgb(0, 0, 0);text-align:center;}#chatgpt-mermaid-\_r_1fj\_ .edgeLabel p{background-color:rgb(0, 0, 0);}#chatgpt-mermaid-\_r_1fj\_ .edgeLabel rect{opacity:0.5;background-color:rgb(0, 0, 0);fill:rgb(0, 0, 0);}#chatgpt-mermaid-\_r_1fj\_ .labelBkg{background-color:rgba(0, 0, 0, 0.5);}#chatgpt-mermaid-\_r_1fj\_ .cluster rect{fill:rgb(48, 48, 48);stroke:rgba(255, 255, 255, 0.15);stroke-width:1px;}#chatgpt-mermaid-\_r_1fj\_ .cluster text{fill:rgb(237, 237, 237);}#chatgpt-mermaid-\_r_1fj\_ .cluster span{color:rgb(237, 237, 237);}#chatgpt-mermaid-\_r_1fj\_ div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;font-family:-apple-system-body,ui-sans-serif,-apple-system,system-ui,"Segoe UI",Helvetica,"Apple Color Emoji",Arial,sans-serif,"Segoe UI Emoji","Segoe UI Symbol";font-size:12px;background:rgb(48, 48, 48);border:1px solid rgba(255, 255, 255, 0.15);border-radius:2px;pointer-events:none;z-index:100;}#chatgpt-mermaid-\_r_1fj\_ .flowchartTitleText{text-anchor:middle;font-size:18px;fill:rgb(237, 237, 237);}#chatgpt-mermaid-\_r_1fj\_ rect.text{fill:none;stroke-width:0;}#chatgpt-mermaid-\_r_1fj\_ .icon-shape,#chatgpt-mermaid-\_r_1fj\_ .image-shape{background-color:rgb(0, 0, 0);text-align:center;}#chatgpt-mermaid-\_r_1fj\_ .icon-shape p,#chatgpt-mermaid-\_r_1fj\_ .image-shape p{background-color:rgb(0, 0, 0);padding:2px;}#chatgpt-mermaid-\_r_1fj\_ .icon-shape .label rect,#chatgpt-mermaid-\_r_1fj\_ .image-shape .label rect{opacity:0.5;background-color:rgb(0, 0, 0);fill:rgb(0, 0, 0);}#chatgpt-mermaid-\_r_1fj\_ .label-icon{display:inline-block;height:1em;overflow:visible;vertical-align:-0.125em;}#chatgpt-mermaid-\_r_1fj\_ .node .label-icon path{fill:currentColor;stroke:revert;stroke-width:revert;}#chatgpt-mermaid-\_r_1fj\_ .node .neo-node{stroke:rgb(31, 78, 148);}#chatgpt-mermaid-\_r_1fj\_ [data-look="neo"].node rect,#chatgpt-mermaid-\_r_1fj\_ [data-look="neo"].cluster rect,#chatgpt-mermaid-\_r_1fj\_ [data-look="neo"].node polygon{stroke:url(#chatgpt-mermaid-\_r_1fj\_-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#chatgpt-mermaid-\_r_1fj\_ [data-look="neo"].swimlane.cluster rect{filter:none;}#chatgpt-mermaid-\_r_1fj\_ [data-look="neo"].node path{stroke:url(#chatgpt-mermaid-\_r_1fj\_-gradient);stroke-width:1px;}#chatgpt-mermaid-\_r_1fj\_ [data-look="neo"].node .outer-path{filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#chatgpt-mermaid-\_r_1fj\_ [data-look="neo"].node .neo-line path{stroke:rgb(31, 78, 148);filter:none;}#chatgpt-mermaid-\_r_1fj\_ [data-look="neo"].node circle{stroke:url(#chatgpt-mermaid-\_r_1fj\_-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#chatgpt-mermaid-\_r_1fj\_ [data-look="neo"].node circle .state-start{fill:#000000;}#chatgpt-mermaid-\_r_1fj\_ [data-look="neo"].icon-shape .icon{fill:url(#chatgpt-mermaid-\_r_1fj\_-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#chatgpt-mermaid-\_r_1fj\_ [data-look="neo"].icon-shape .icon-neo path{stroke:url(#chatgpt-mermaid-\_r_1fj\_-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#chatgpt-mermaid-\_r_1fj\_ .node text{font-size:14px;font-weight:600;letter-spacing:normal;fill:rgb(153, 206, 255);}#chatgpt-mermaid-\_r_1fj\_ .edgeLabels text{font-size:13px;font-weight:600;letter-spacing:-0.08px;fill:rgb(153, 206, 255);}#chatgpt-mermaid-\_r_1fj\_ .node tspan[font-weight="normal"],#chatgpt-mermaid-\_r_1fj\_ .edgeLabels tspan[font-weight="normal"]{font-weight:600;}#chatgpt-mermaid-\_r_1fj\_ .edgeLabel .label rect{opacity:1;rx:13px;ry:13px;fill:rgb(0, 14, 26);stroke:rgb(26, 62, 95);stroke-width:1px;}#chatgpt-mermaid-\_r_1fj\_ .node rect,#chatgpt-mermaid-\_r_1fj\_ .node circle,#chatgpt-mermaid-\_r_1fj\_ .node ellipse,#chatgpt-mermaid-\_r_1fj\_ .node polygon,#chatgpt-mermaid-\_r_1fj\_ .node path{fill:rgb(0, 40, 77);stroke:rgba(255, 255, 255, 0.1);stroke-width:1px;}#chatgpt-mermaid-\_r_1fj\_ .node rect{rx:16px;ry:16px;}#chatgpt-mermaid-\_r_1fj\_ .mermaid-decision .label-container{fill:rgb(0, 14, 26);stroke:rgb(26, 62, 95);stroke-dasharray:2,2;}#chatgpt-mermaid-\_r_1fj\_ .edgePaths .flowchart-link{stroke:rgb(175, 175, 175);stroke-width:1px;stroke-linecap:round;stroke-linejoin:round;}#chatgpt-mermaid-\_r_1fj\_ .marker{fill:rgb(175, 175, 175);stroke:rgb(175, 175, 175);}#chatgpt-mermaid-\_r_1fj\_ :root{--mermaid-font-family:-apple-system-body,ui-sans-serif,-apple-system,system-ui,"Segoe UI",Helvetica,"Apple Color Emoji",Arial,sans-serif,"Segoe UI Emoji","Segoe UI Symbol";}Teacher LoginView Today's ClassesOpen Assigned BatchMark AttendanceConduct ClassUpload Study MaterialCreate HomeworkStudents Receive Notification
+
+### Workflow C — IELTS assessment
+
+\#chatgpt-mermaid-\_r_1fq\_{font-family:-apple-system-body,ui-sans-serif,-apple-system,system-ui,"Segoe UI",Helvetica,"Apple Color Emoji",Arial,sans-serif,"Segoe UI Emoji","Segoe UI Symbol";font-size:16px;fill:rgb(237, 237, 237);}@keyframes edge-animation-frame{from{stroke-dashoffset:0;}}@keyframes dash{to{stroke-dashoffset:0;}}#chatgpt-mermaid-\_r_1fq\_ .edge-animation-slow{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 50s linear infinite;stroke-linecap:round;}#chatgpt-mermaid-\_r_1fq\_ .edge-animation-fast{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 20s linear infinite;stroke-linecap:round;}#chatgpt-mermaid-\_r_1fq\_ .error-icon{fill:rgb(48, 48, 48);}#chatgpt-mermaid-\_r_1fq\_ .error-text{fill:rgb(237, 237, 237);stroke:rgb(237, 237, 237);}#chatgpt-mermaid-\_r_1fq\_ .edge-thickness-normal{stroke-width:1px;}#chatgpt-mermaid-\_r_1fq\_ .edge-thickness-thick{stroke-width:3.5px;}#chatgpt-mermaid-\_r_1fq\_ .edge-pattern-solid{stroke-dasharray:0;}#chatgpt-mermaid-\_r_1fq\_ .edge-thickness-invisible{stroke-width:0;fill:none;}#chatgpt-mermaid-\_r_1fq\_ .edge-pattern-dashed{stroke-dasharray:3;}#chatgpt-mermaid-\_r_1fq\_ .edge-pattern-dotted{stroke-dasharray:2;}#chatgpt-mermaid-\_r_1fq\_ .marker{fill:rgb(175, 175, 175);stroke:rgb(175, 175, 175);}#chatgpt-mermaid-\_r_1fq\_ .marker.cross{stroke:rgb(175, 175, 175);}#chatgpt-mermaid-\_r_1fq\_ svg{font-family:-apple-system-body,ui-sans-serif,-apple-system,system-ui,"Segoe UI",Helvetica,"Apple Color Emoji",Arial,sans-serif,"Segoe UI Emoji","Segoe UI Symbol";font-size:16px;}#chatgpt-mermaid-\_r_1fq\_ p{margin:0;}#chatgpt-mermaid-\_r_1fq\_ .label{font-family:-apple-system-body,ui-sans-serif,-apple-system,system-ui,"Segoe UI",Helvetica,"Apple Color Emoji",Arial,sans-serif,"Segoe UI Emoji","Segoe UI Symbol";color:rgb(237, 237, 237);}#chatgpt-mermaid-\_r_1fq\_ .cluster-label text{fill:rgb(237, 237, 237);}#chatgpt-mermaid-\_r_1fq\_ .cluster-label span{color:rgb(237, 237, 237);}#chatgpt-mermaid-\_r_1fq\_ .cluster-label span p{background-color:transparent;}#chatgpt-mermaid-\_r_1fq\_ .label text,#chatgpt-mermaid-\_r_1fq\_ span{fill:rgb(237, 237, 237);color:rgb(237, 237, 237);}#chatgpt-mermaid-\_r_1fq\_ .node rect,#chatgpt-mermaid-\_r_1fq\_ .node circle,#chatgpt-mermaid-\_r_1fq\_ .node ellipse,#chatgpt-mermaid-\_r_1fq\_ .node polygon,#chatgpt-mermaid-\_r_1fq\_ .node path{fill:rgb(9, 23, 44);stroke:rgb(31, 78, 148);stroke-width:1px;}#chatgpt-mermaid-\_r_1fq\_ .rough-node .label text,#chatgpt-mermaid-\_r_1fq\_ .node .label text,#chatgpt-mermaid-\_r_1fq\_ .image-shape .label,#chatgpt-mermaid-\_r_1fq\_ .icon-shape .label{text-anchor:middle;}#chatgpt-mermaid-\_r_1fq\_ .node .katex path{fill:#000;stroke:#000;stroke-width:1px;}#chatgpt-mermaid-\_r_1fq\_ .rough-node .label,#chatgpt-mermaid-\_r_1fq\_ .node .label,#chatgpt-mermaid-\_r_1fq\_ .image-shape .label,#chatgpt-mermaid-\_r_1fq\_ .icon-shape .label{text-align:center;}#chatgpt-mermaid-\_r_1fq\_ .node.clickable{cursor:pointer;}#chatgpt-mermaid-\_r_1fq\_ .root .anchor path{fill:rgb(175, 175, 175)!important;stroke-width:0;stroke:rgb(175, 175, 175);}#chatgpt-mermaid-\_r_1fq\_ .arrowheadPath{fill:rgb(175, 175, 175);}#chatgpt-mermaid-\_r_1fq\_ .edgePath .path{stroke:rgb(175, 175, 175);stroke-width:1px;}#chatgpt-mermaid-\_r_1fq\_ .flowchart-link{stroke:rgb(175, 175, 175);fill:none;}#chatgpt-mermaid-\_r_1fq\_ .edgeLabel{background-color:rgb(0, 0, 0);text-align:center;}#chatgpt-mermaid-\_r_1fq\_ .edgeLabel p{background-color:rgb(0, 0, 0);}#chatgpt-mermaid-\_r_1fq\_ .edgeLabel rect{opacity:0.5;background-color:rgb(0, 0, 0);fill:rgb(0, 0, 0);}#chatgpt-mermaid-\_r_1fq\_ .labelBkg{background-color:rgba(0, 0, 0, 0.5);}#chatgpt-mermaid-\_r_1fq\_ .cluster rect{fill:rgb(48, 48, 48);stroke:rgba(255, 255, 255, 0.15);stroke-width:1px;}#chatgpt-mermaid-\_r_1fq\_ .cluster text{fill:rgb(237, 237, 237);}#chatgpt-mermaid-\_r_1fq\_ .cluster span{color:rgb(237, 237, 237);}#chatgpt-mermaid-\_r_1fq\_ div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;font-family:-apple-system-body,ui-sans-serif,-apple-system,system-ui,"Segoe UI",Helvetica,"Apple Color Emoji",Arial,sans-serif,"Segoe UI Emoji","Segoe UI Symbol";font-size:12px;background:rgb(48, 48, 48);border:1px solid rgba(255, 255, 255, 0.15);border-radius:2px;pointer-events:none;z-index:100;}#chatgpt-mermaid-\_r_1fq\_ .flowchartTitleText{text-anchor:middle;font-size:18px;fill:rgb(237, 237, 237);}#chatgpt-mermaid-\_r_1fq\_ rect.text{fill:none;stroke-width:0;}#chatgpt-mermaid-\_r_1fq\_ .icon-shape,#chatgpt-mermaid-\_r_1fq\_ .image-shape{background-color:rgb(0, 0, 0);text-align:center;}#chatgpt-mermaid-\_r_1fq\_ .icon-shape p,#chatgpt-mermaid-\_r_1fq\_ .image-shape p{background-color:rgb(0, 0, 0);padding:2px;}#chatgpt-mermaid-\_r_1fq\_ .icon-shape .label rect,#chatgpt-mermaid-\_r_1fq\_ .image-shape .label rect{opacity:0.5;background-color:rgb(0, 0, 0);fill:rgb(0, 0, 0);}#chatgpt-mermaid-\_r_1fq\_ .label-icon{display:inline-block;height:1em;overflow:visible;vertical-align:-0.125em;}#chatgpt-mermaid-\_r_1fq\_ .node .label-icon path{fill:currentColor;stroke:revert;stroke-width:revert;}#chatgpt-mermaid-\_r_1fq\_ .node .neo-node{stroke:rgb(31, 78, 148);}#chatgpt-mermaid-\_r_1fq\_ [data-look="neo"].node rect,#chatgpt-mermaid-\_r_1fq\_ [data-look="neo"].cluster rect,#chatgpt-mermaid-\_r_1fq\_ [data-look="neo"].node polygon{stroke:url(#chatgpt-mermaid-\_r_1fq\_-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#chatgpt-mermaid-\_r_1fq\_ [data-look="neo"].swimlane.cluster rect{filter:none;}#chatgpt-mermaid-\_r_1fq\_ [data-look="neo"].node path{stroke:url(#chatgpt-mermaid-\_r_1fq\_-gradient);stroke-width:1px;}#chatgpt-mermaid-\_r_1fq\_ [data-look="neo"].node .outer-path{filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#chatgpt-mermaid-\_r_1fq\_ [data-look="neo"].node .neo-line path{stroke:rgb(31, 78, 148);filter:none;}#chatgpt-mermaid-\_r_1fq\_ [data-look="neo"].node circle{stroke:url(#chatgpt-mermaid-\_r_1fq\_-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#chatgpt-mermaid-\_r_1fq\_ [data-look="neo"].node circle .state-start{fill:#000000;}#chatgpt-mermaid-\_r_1fq\_ [data-look="neo"].icon-shape .icon{fill:url(#chatgpt-mermaid-\_r_1fq\_-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#chatgpt-mermaid-\_r_1fq\_ [data-look="neo"].icon-shape .icon-neo path{stroke:url(#chatgpt-mermaid-\_r_1fq\_-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#chatgpt-mermaid-\_r_1fq\_ .node text{font-size:14px;font-weight:600;letter-spacing:normal;fill:rgb(153, 206, 255);}#chatgpt-mermaid-\_r_1fq\_ .edgeLabels text{font-size:13px;font-weight:600;letter-spacing:-0.08px;fill:rgb(153, 206, 255);}#chatgpt-mermaid-\_r_1fq\_ .node tspan[font-weight="normal"],#chatgpt-mermaid-\_r_1fq\_ .edgeLabels tspan[font-weight="normal"]{font-weight:600;}#chatgpt-mermaid-\_r_1fq\_ .edgeLabel .label rect{opacity:1;rx:13px;ry:13px;fill:rgb(0, 14, 26);stroke:rgb(26, 62, 95);stroke-width:1px;}#chatgpt-mermaid-\_r_1fq\_ .node rect,#chatgpt-mermaid-\_r_1fq\_ .node circle,#chatgpt-mermaid-\_r_1fq\_ .node ellipse,#chatgpt-mermaid-\_r_1fq\_ .node polygon,#chatgpt-mermaid-\_r_1fq\_ .node path{fill:rgb(0, 40, 77);stroke:rgba(255, 255, 255, 0.1);stroke-width:1px;}#chatgpt-mermaid-\_r_1fq\_ .node rect{rx:16px;ry:16px;}#chatgpt-mermaid-\_r_1fq\_ .mermaid-decision .label-container{fill:rgb(0, 14, 26);stroke:rgb(26, 62, 95);stroke-dasharray:2,2;}#chatgpt-mermaid-\_r_1fq\_ .edgePaths .flowchart-link{stroke:rgb(175, 175, 175);stroke-width:1px;stroke-linecap:round;stroke-linejoin:round;}#chatgpt-mermaid-\_r_1fq\_ .marker{fill:rgb(175, 175, 175);stroke:rgb(175, 175, 175);}#chatgpt-mermaid-\_r_1fq\_ :root{--mermaid-font-family:-apple-system-body,ui-sans-serif,-apple-system,system-ui,"Segoe UI",Helvetica,"Apple Color Emoji",Arial,sans-serif,"Segoe UI Emoji","Segoe UI Symbol";}Teacher Creates Mock TestAssign to BatchStudent Takes TestAutomatic Scoring: Listeningand ReadingTeacher Evaluates Writing andSpeakingCalculate Estimated OverallBandUpdate Student ProgressGenerate Performance Report
+
+### Workflow D — Fee management
+
+1. Admin configures course fee.
+2. Student enrols in the course.
+3. System creates an invoice.
+4. Student makes a payment.
+5. Admin or authorised staff records the payment.
+6. System generates a receipt.
+7. Invoice balance is updated.
+8. Overdue invoices appear in the admin dashboard.
+
+For online payments, use a payment gateway with verified server-side payment callbacks. Do not consider a payment successful merely because the browser redirects to a success page.
+
+# 8. UI/UX design requirements
+
+The interface should feel like a modern educational SaaS application, not an old-fashioned school management system.
+
+## Suggested design direction
+
+[School Management System Dashboard Design UI Design by AI + Digital Product Designer I Istie Iftear on Dribbble](https://images.openai.com/static-rsc-4/DzCzs-xUq_D4qPY89MwGxYgHNTAjSbAjzKZvObBXMqhLDK6YmbQyl_8XwFWUFhScMdcrHDoJxc2J5LM6-jnmREETW5pagEdsiKO6HnWDWuoATFL6hviXEeOgVD9gUAS3OXsZzSvN48axk2ll3hCJCtJugyi5Ho50YNsPNCTyaro?purpose=inline)
+
+Admin Dashboard
+
+Statistics, recent admissions, payments and centre activity.
+
+[Education Dashboard designs, themes, templates and downloadable graphic elements on Dribbble](https://images.openai.com/static-rsc-4/e6qTN7nbkI5UMX9U_UvwCT4859ob4Psl1OHgMa8l3CM1toyGTZz7fPDoorHzbi_Iya8NE4WK_Z7HlfssikZyGWQ8VH8rUKL61TKyCP13IIunjlp3i1xODrqMA9-T663_9xpK-oEmyvO7AwDmJdhL_hdgcBsM8L9nzuT6LqwyY-0?purpose=inline)
+
+Student Dashboard
+
+Learning progress, upcoming classes and IELTS tests.
+
+[EduNova AI ERP – School & Coaching Center Dashboard UI Design by TechX Solutions  on Dribbble](https://images.openai.com/static-rsc-4/iNb33-Glgwmh89VOHfM9xsEBfnUr21irxASSKk3sgk8SKVoC3ivhtdYbXTL98tgRieL7hAPUXL69eXeL8Pb-Wb4PLE5J-693_cjvTp92x5yfNoYKt-Lgj9dhA6oNfZqikXJWcO3q1sTv7kYVerRGwNSAvtK_DsvzYE31Ha1gZCw?purpose=inline)
+
+Teacher Dashboard
+
+Assigned classes, evaluations and student performance.
+
+[IELTS Mock Test Platform | Full-Length Practice Tests](https://images.openai.com/static-rsc-4/UgKg1l9gnpITrM6b4pn7y8k2szM_T-IHJQkG0QyHx9pd0JiDIkGWWO-kfkoCg35UZI_BaHEwZ2I4czoUTpdThyr9mxX2kYI6gH0fTmE6I-oTWV9NdNPqqLtP8SbWp4SnuJQXNnlM6OFIO0k3xL6AY8Dyf2rMU9tjqA2Q3aNO-G0?purpose=inline)
+
+IELTS Test Interface
+
+Reading passages, timer, question navigation and answer panel.
+
+### Recommended navigation
+
+Admin sidebar
+
+1. Dashboard
+2. Students
+3. Admissions & Enquiries
+4. Courses
+5. Batches
+6. Timetable
+7. Attendance
+8. IELTS Learning
+9. Question Bank
+10. Mock Tests
+11. Assignments
+12. Fees & Payments
+13. Teachers
+14. Reports
+15. Notifications
+16. Settings
+
+Student navigation
+
+1. My Dashboard
+2. My Course
+3. Study Materials
+4. Listening Practice
+5. Reading Practice
+6. Writing Practice
+7. Speaking Practice
+8. Mock Tests
+9. Assignments
+10. My Results
+11. Attendance
+12. Timetable
+13. Payments
+14. Profile
+
+Mobile design considerations
+
+- Collapsible sidebar.
+- Bottom navigation for student mobile view.
+- Large touch-friendly buttons.
+- Responsive IELTS question interface.
+- Audio recording and playback support.
+- Save progress when completing tests.
+- Clear countdown timers.
+- Avoid horizontal scrolling wherever possible.
+
+# 9. Development roadmap
+
+I recommend developing the system in eight phases. For a small development team or a focused solo developer, a reasonable initial target is approximately 14–18 weeks.
+
+## 14–18 week development plan
+
+Indicative timeline, assuming one focused developer and a defined scope.
+
+1. Phase 1 — Requirements & Design
+
+   Weeks 1–2
+   - Finalise requirements.
+   - Define roles and permissions.
+   - Design database ER diagram.
+   - Create UI wireframes.
+   - Establish project structure.
+2. Phase 2 — Foundation & Authentication
+
+   Weeks 3–4
+   - Backend and frontend setup.
+   - Database configuration.
+   - Login and logout.
+   - Role-based access control.
+   - Dashboard layouts.
+3. Phase 3 — Centre Management
+
+   Weeks 5–7
+   - Student registration.
+   - Teacher management.
+   - Courses and batches.
+   - Timetable.
+   - Attendance.
+4. Phase 4 — Finance
+
+   Week 8
+   - Fee structures.
+   - Invoices and payments.
+   - Receipts.
+   - Outstanding balance reports.
+5. Phase 5 — IELTS Learning
+
+   Weeks 9–11
+   - Learning materials.
+   - Assignments.
+   - IELTS question bank.
+   - Listening and Reading tests.
+   - Writing and Speaking submissions.
+6. Phase 6 — Assessment & Analytics
+
+   Weeks 12–13
+   - Test evaluation.
+   - Band calculations.
+   - Student progress charts.
+   - Teacher feedback.
+   - Reports.
+7. Phase 7 — Quality & Deployment
+
+   Weeks 14–15
+   - Functional testing.
+   - Security testing.
+   - Mobile responsiveness.
+   - Backup and restore testing.
+   - Production deployment.
+8. Phase 8 — Pilot & Improvements
+
+   Weeks 16–18
+   - Add real centre data.
+   - Train teachers and administrators.
+   - Pilot with a small batch.
+   - Fix usability issues.
+   - Roll out to the entire centre.
+
+## 10. MVP — What should actually be in version 1?
+
+I would not build all 14 modules at once.
+
+Your first usable release should include:
+
+Version 1 — Launch checklist
+
+Must have
+
+Implementation tracker
+
+0/17
+
+Secure login and role permissions
+
+Admin dashboard
+
+Student registration and profiles
+
+Teacher management
+
+Course and batch management
+
+Timetable and class scheduling
+
+Attendance tracking
+
+Fee management and receipts
+
+Study material upload
+
+IELTS Listening practice tests
+
+IELTS Reading practice tests
+
+Writing assignment submission and evaluation
+
+Speaking recording and teacher evaluation
+
+Mock test results and band tracking
+
+Basic reports
+
+Responsive mobile interface
+
+Database backup and restore
+
+Reset checklist
+
+### Features to postpone until version 2
+
+- AI-powered essay evaluation.
+- AI speaking evaluation.
+- AI conversational tutor.
+- WhatsApp automation.
+- Mobile native application.
+- Gamification and leaderboards.
+- Advanced financial accounting.
+- Multi-branch functionality.
+- Parent portal.
+
+This keeps the first release achievable and prevents the project from becoming unnecessarily complicated.
+
+# 11. Testing and acceptance criteria
+
+Before deploying, define what it means for the software to be finished.
+
+| Feature              | Acceptance criterion                                           |
+| -------------------- | -------------------------------------------------------------- |
+| Login                | Users can only access authorised sections                      |
+| Student registration | Student record and unique ID are generated                     |
+| Batch allocation     | Student can be assigned to an active batch                     |
+| Attendance           | Attendance is recorded and reflected in reports                |
+| Fees                 | Partial and full payments update outstanding balance correctly |
+| IELTS tests          | Students can submit and review eligible test results           |
+| Writing              | Teachers can evaluate all four writing criteria                |
+| Speaking             | Teachers can evaluate all four speaking criteria               |
+| Band calculation     | Overall estimated band follows applicable IELTS rounding       |
+| Reports              | Admin can export selected records                              |
+| Mobile               | Core operations work on mobile browsers                        |
+| Security             | Unauthorised users cannot access protected data                |
+| Backup               | Data can be successfully restored from a backup                |
+
+### Critical edge cases to test
+
+- Student moves to another batch.
+- Student pauses or leaves the course.
+- Student pays in multiple instalments.
+- Student submits an assignment after its deadline.
+- Teacher is replaced for a class.
+- A mock test is interrupted.
+- Student retakes an examination.
+- A payment callback is received more than once.
+- Two teachers attempt to evaluate the same submission.
+- An admin corrects attendance.
+
+# 12. Deployment and operational setup
+
+For a single centre, start with one production environment and a staging environment.
+
+| Component  | Recommendation                         |
+| ---------- | -------------------------------------- |
+| Domain     | Centre-owned domain                    |
+| Hosting    | Reputable Linux VPS or managed cloud   |
+| Backend    | Dockerised Spring Boot                 |
+| Frontend   | React production build                 |
+| Database   | Managed or secured PostgreSQL          |
+| Storage    | Private file storage                   |
+| HTTPS      | SSL certificate                        |
+| Backups    | Automated daily database backups       |
+| Monitoring | Application logs and uptime monitoring |
+| Email      | Transactional email provider           |
+
+Suggested deployment structure:
+
+```
+IELTS-LMS/
+│
+├── frontend/
+│   ├── src/
+│   ├── components/
+│   ├── pages/
+│   └── services/
+│
+├── backend/
+│   └── src/main/java/
+│       └── com/ieltslms/
+│           ├── auth/
+│           ├── student/
+│           ├── teacher/
+│           ├── course/
+│           ├── batch/
+│           ├── attendance/
+│           ├── timetable/
+│           ├── learning/
+│           ├── assessment/
+│           ├── finance/
+│           ├── notification/
+│           └── report/
+│
+├── database/
+│   ├── migrations/
+│   └── seed/
+│
+├── deployment/
+│   ├── Dockerfile
+│   └── docker-compose.yml
+│
+└── documentation/
+    ├── requirements/
+    ├── architecture/
+    ├── database/
+    └── api/
+```
+
+Use database migrations (such as Flyway) from the beginning rather than manually changing production database tables.
+
+# 13. Important design decisions before coding
+
+There are a few decisions that will significantly affect the project.
+
+| Decision                 | My recommendation                                                       |
+| ------------------------ | ----------------------------------------------------------------------- |
+| Student account creation | Admin creates or invites student                                        |
+| Student admission        | Enquiry → Assessment → Enrolment                                        |
+| IELTS courses            | Academic and General Training                                           |
+| IELTS scoring            | Four individual skill scores + overall band                             |
+| Mock test evaluation     | Automatic for objective questions, teacher-led for Writing and Speaking |
+| Payment records          | Support instalments and partial payments                                |
+| Study materials          | PDF, audio, video and documents                                         |
+| User authentication      | Email or phone + password                                               |
+| Student access           | Private student account                                                 |
+| Notifications            | In-app initially, integrations later                                    |
+| Deployment               | Private production web application                                      |
+
+### Five things I would be particularly careful about
+
+1\. IELTS assessment accuracy
+
+IELTS Writing and Speaking need separate assessment criteria. Don't simply store an overall score. Store each criterion score, assessor, feedback and assessment date. Keep the estimated score distinct from official IELTS results.
+
+2\. Test-taking experience
+
+Listening and Reading should have a dedicated test interface, including timers, question navigation, answer persistence and submission handling. It should not feel like filling out a normal Google Form.
+
+3\. Content copyright
+
+Use original or appropriately licensed IELTS practice material. Do not upload copyrighted commercial preparation books or official test materials without permission.
+
+4\. Financial accuracy
+
+Use proper invoice and payment records. A student's fee balance should be calculated from financial transactions, not manually edited.
+
+5\. Student privacy
+
+Speaking recordings, personal documents, test results and contact details should have restricted access, appropriate consent and retention policies.
+
+# 14. Final recommended project scope
+
+# IELTS Centre Management & Learning System
+
+Recommended project direction
+
+A unified platform for IELTS training operations and student learning.
+
+Business management
+
+- Admissions and students
+- Teachers and batches
+- Attendance and timetable
+- Fees and receipts
+
+Academic management
+
+- IELTS course curriculum
+- Study materials
+- Assignments and homework
+- Mock examinations
+
+IELTS assessment
+
+- Listening and Reading tests
+- Writing submissions and evaluations
+- Speaking recordings and evaluations
+- Band-score analytics
+
+Student experience
+
+- Personal learning dashboard
+- Test history
+- Progress tracking
+- Feedback and notifications
+
+Architecture
+
+Modular monolith
+
+Backend
+
+Java / Spring Boot
+
+Frontend
+
+React / TypeScript
+
+Database
+
+PostgreSQL
+
+Deployment
+
+Docker / Linux
+
+Initial timeline
+
+14–18 weeks
+
+# 15. What I recommend doing next
+
+Before writing code, let's establish the exact business requirements. There are a few centre-specific details that I don't want to assume.
+
+## Centre-specific requirements questionnaire
+
+Answer these six questions to finalise the first version of the LMS.
+
+1\. Expected number of students
+
+Below 50
+
+50–150
+
+150–300
+
+300–500
+
+500+
+
+2\. Number of teachers
+
+1
+
+2–5
+
+6–10
+
+10+
+
+3\. How are classes conducted?
+
+Classroom only
+
+Both classroom and online
+
+Online only
+
+4\. How are students charged?
+
+Monthly fees
+
+Course-based / package fees
+
+Both monthly and course-based
+
+Custom instalments
+
+5\. Who evaluates IELTS practice tests?
+
+Teacher evaluates everything
+
+Automatic Listening/Reading + teacher evaluates Writing/Speaking
+
+AI-assisted evaluation + teacher verification
+
+6\. How should student accounts be created?
+
+Admin creates student accounts
+
+Students register and admin approves
+
+Both options
+
+Anything else? (Optional)
+
+Finalise requirements&#x20;
+
+My suggested next deliverable: A proper Software Requirements Specification (SRS), followed by the database ER diagram, detailed table definitions, API endpoint list and screen-by-screen UI specification. Once those are ready, development can proceed module by module without constantly redesigning the system.
